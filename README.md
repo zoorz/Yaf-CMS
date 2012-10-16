@@ -5,7 +5,7 @@
 	<li>Require:
 	    <ul>
 		<li>PHP 5 >= 5.3.0</li>
-		<li>PHP Yaf</li>
+		<li>PHP Yaf >= 2.1.18</li>
 		<li>MySQL 5 >= 5.5</li>
 	    </ul>
 	</li>
