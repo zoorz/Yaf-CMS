@@ -1,4 +1,4 @@
-<h1>Yaf-CMS</h1><br/>
+<strong>Yaf-CMS</strong><br/>
 <ul>
 	<li>Author: Lucas Rosa <contato [at] lucasrosa [dot] com [dot] br</li>
 	<li>Description: CMS PHP using Yaf (Yet Another Framework)</li>
