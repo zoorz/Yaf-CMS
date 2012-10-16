@@ -1,8 +1,10 @@
 <h1>Entries - Page <?php echo $this->page; ?></h1>
 <?php
 foreach ($this->entries as $entry):
-    echo '<h3>' . $entry->title . ' - ' . $entry->date_created . '</h3>';
-    echo '<p>' . $entry->content . '</p>';
+	//echo '<h3>' . $entry->title . ' - ' . $entry->date_created . '</h3>';
+	//echo '<p>' . $entry->content . '</p>';
+	echo '<h3>' . $entry->dateJoined . ' - ' . $entry->options . '</h3>';
+	echo '<p>' . $entry->idUser . ' - ' . $entry->idUserGroup . '</p>';
 endforeach;
 ?>
 <a href="/index/page/100">Paging Route</a>
