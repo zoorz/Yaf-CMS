@@ -12,6 +12,8 @@ class AppController extends Yaf_Controller_Abstract
 		global $_DEBUGGER;
 		$this->debugger = $_DEBUGGER;
 		$this->controller_profile = $this->debugger->newProfiler( 'CONTROLLER_PROFILER' );
+		
+		$this->_layout = Yaf_Registry::get('layout');
 	}
 	
 	public function __destruct()

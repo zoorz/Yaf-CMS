@@ -3,18 +3,16 @@ class IndexController extends AppController
 {
 	public function indexAction()
 	{
-		$page = ($this->getRequest()->getParam('page')) ?: 0; //unused - see Bootstrap::_initRoutes
+		$page = ($this->getRequest()->getParam('page')) ?: 0;
 
-		$blog = new BlogModel();
-		echo '<pre>'; print_r( $this->getRequest()->getParams() );
-		exit;
+		//$blog = new BlogModel();
 		
-		/*view*/
 		//$this->_view->entries = $blog->fetch(PDO::FETCH_LAZY);
-		$this->_view->entries = $blog->fetchAll(null, null, 5000);
+		//$this->_view->entries = $blog->find();
 		$this->_view->page = $page;
 
 		/*layout*/
-		$this->_layout->meta_title = 'A Blog';
+		$this->getView()->assign('meta_title', 'A Blog');
+		$this->getView()->assign("body", "Hello Wrold<br/>");
 	}
 }

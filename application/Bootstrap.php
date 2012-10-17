@@ -9,11 +9,6 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
 		$this->_config = Yaf_Application::app()->getConfig();
 	}
 
-	/**
-	 * initIncludePath is only required because zend components have a shit load of
-	 * include_once calls everywhere. Other libraries could probably just use
-	 * the autoloader (see _initNamespaces below).
-	 */
 	public function _initIncludePath()
 	{
 		set_include_path(get_include_path() . PATH_SEPARATOR . $this->_config->application->library);
@@ -30,7 +25,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
 
 	public function _initNamespaces()
 	{
-		Yaf_Loader::getInstance()->registerLocalNameSpace(array("Zend"));
+		Yaf_Loader::getInstance()->registerLocalNameSpace(array("Zend", "Smarty"));
 	}
 
 	public function _initRoutes()
@@ -45,28 +40,36 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
 			)
 		);
 	}
-
+/*
 	public function _initLayout(Yaf_Dispatcher $dispatcher)
 	{
-		$request = new CMS_Request();
-		if( !$request->isXmlHttpRequest() )
-		{
-			$layout = new LayoutPlugin('ajax.phtml');
-		}
-		else
-		{
-			$layout = new LayoutPlugin('layout.phtml');
-		}
-		Yaf_Registry::set('layout', $layout);
-		$dispatcher->registerPlugin($layout);
+		$smarty = new Smarty_Adapter();
+		Yaf_Registry::set( 'layout', $smarty );
+		$dispatcher->registerPlugin( $smarty );
 	}
-
-	public function _initDefaultDbAdapter()
+	*/
+	public function _initSmarty(Yaf_Dispatcher $dispatcher)
 	{
-		$dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(
-			$this->_config->database->params->toArray()
+		Yaf_Loader::import("Smarty/Adapter.php");
+		$smarty = new Smarty_Adapter(null, $this->_config->smarty);
+		$dispatcher->setView($smarty);
+	}
+	
+	protected function _initDoctrine()
+	{
+		//$this->getApplication()->getAutoloader()->pushAutoloader(array('Doctrine', 'autoload'));
+		spl_autoload_register(array('Doctrine', 'modelsAutoload'));
+		//$doctrineConfig = $this->getOption('doctrine');
+		$doctrineConfig = $this->_config->doctrine;
+		$manager = Doctrine_Manager::getInstance();
+		$manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
+		$manager->setAttribute(
+			Doctrine::ATTR_MODEL_LOADING,
+			$doctrineConfig['model_autoloading']
 		);
-
-		Zend_Db_Table::setDefaultAdapter($dbAdapter);
+		Doctrine::loadModels($doctrineConfig['models_path']);
+		$conn = Doctrine_Manager::connection($doctrineConfig['dsn'], 'doctrine');
+		$conn->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
+		return $conn;
 	}
 }
