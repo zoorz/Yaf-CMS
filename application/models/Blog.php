@@ -1,5 +1,5 @@
 <?php
-class BlogModel extends Zend_Db_Table_Abstract
+class BlogModel extends AppModel
 {
 	protected $_name = 'blog';
 }

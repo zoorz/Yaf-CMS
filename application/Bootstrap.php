@@ -48,16 +48,16 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
 
 	public function _initLayout(Yaf_Dispatcher $dispatcher)
 	{
-		/*layout allows boilerplate HTML to live in /views/layout rather than every script*/
-		$layout = new LayoutPlugin('layout.phtml');
-
-		/* Store a reference in the registry so values can be set later.
-		 * This is a hack to make up for the lack of a getPlugin
-		 * method in the dispatcher.
-		 */
+		$request = new CMS_Request();
+		if( !$request->isXmlHttpRequest() )
+		{
+			$layout = new LayoutPlugin('ajax.phtml');
+		}
+		else
+		{
+			$layout = new LayoutPlugin('layout.phtml');
+		}
 		Yaf_Registry::set('layout', $layout);
-
-		/*add the plugin to the dispatcher*/
 		$dispatcher->registerPlugin($layout);
 	}
 
