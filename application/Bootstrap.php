@@ -25,7 +25,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
 
 	public function _initNamespaces()
 	{
-		Yaf_Loader::getInstance()->registerLocalNameSpace(array("Zend", "Smarty"));
+		Yaf_Loader::getInstance()->registerLocalNameSpace(array("Zend"));
 	}
 
 	public function _initRoutes()
@@ -40,36 +40,28 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
 			)
 		);
 	}
-/*
+    
 	public function _initLayout(Yaf_Dispatcher $dispatcher)
 	{
-		$smarty = new Smarty_Adapter();
-		Yaf_Registry::set( 'layout', $smarty );
-		$dispatcher->registerPlugin( $smarty );
-	}
-	*/
-	public function _initSmarty(Yaf_Dispatcher $dispatcher)
+		$layout = new LayoutPlugin('layout.phtml');
+		Yaf_Registry::set('layout', $layout);
+		$dispatcher->registerPlugin($layout);
+    }
+    
+	public function _initDatabase()
 	{
-		Yaf_Loader::import("Smarty/Adapter.php");
-		$smarty = new Smarty_Adapter(null, $this->_config->smarty);
-		$dispatcher->setView($smarty);
+		/*echo '<pre>';
+		$paramsDb = $this->_config->database->params;
+		print_r( new CMS_Db_PDO_MySQL( $paramsDb->host, $paramsDb->user, $paramsDb->pass, $paramsDb->base ) );
+		echo 'raa!';
+		exit;*/
 	}
-	
-	protected function _initDoctrine()
+	/*
+	public function _initDefaultDbAdapter()
 	{
-		//$this->getApplication()->getAutoloader()->pushAutoloader(array('Doctrine', 'autoload'));
-		spl_autoload_register(array('Doctrine', 'modelsAutoload'));
-		//$doctrineConfig = $this->getOption('doctrine');
-		$doctrineConfig = $this->_config->doctrine;
-		$manager = Doctrine_Manager::getInstance();
-		$manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
-		$manager->setAttribute(
-			Doctrine::ATTR_MODEL_LOADING,
-			$doctrineConfig['model_autoloading']
+		$dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(
+			$this->_config->database->params->toArray()
 		);
-		Doctrine::loadModels($doctrineConfig['models_path']);
-		$conn = Doctrine_Manager::connection($doctrineConfig['dsn'], 'doctrine');
-		$conn->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
-		return $conn;
-	}
+		Zend_Db_Table::setDefaultAdapter( $dbAdapter );
+	}*/
 }

@@ -1,4 +1,4 @@
 <?php
-class AppModel extends Doctrine_Table
+class AppModel extends Zend_Db_Table_Abstract
 {
 }

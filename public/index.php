@@ -1,5 +1,6 @@
 <?php
 define("DS", '/');
+define("LIB_PATH",  dirname(__FILE__).DS.'..'.DS.'library'.DS);
 define("APP_PATH",  dirname(__FILE__).DS.'..'.DS.'application'.DS);
 
 global $_DEBUGGER, $_PROFILER;
@@ -18,5 +19,4 @@ $_DEBUGGER = new RDS_Network( $name, 'localhost', '6660', true, false );
 $_PROFILER = $_DEBUGGER->newProfiler( 'GLOBAL_PROFILER' );
 
 $app->bootstrap()->run();
-
 $_PROFILER->end();

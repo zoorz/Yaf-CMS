@@ -1,18 +1,36 @@
 <?php
 class IndexController extends AppController
 {
+	public function init()
+	{
+		parent::init();
+		$this->_layout->meta_title = 'Teste de Caraga :: YafCMS';
+		$this->_layout->body = 'Hello Wrold';
+	}
+	
 	public function indexAction()
 	{
 		$page = ($this->getRequest()->getParam('page')) ?: 0;
 
-		//$blog = new BlogModel();
+		$blog = new BlogModel();
 		
-		//$this->_view->entries = $blog->fetch(PDO::FETCH_LAZY);
-		//$this->_view->entries = $blog->find();
 		$this->_view->page = $page;
 
-		/*layout*/
-		$this->getView()->assign('meta_title', 'A Blog');
-		$this->getView()->assign("body", "Hello Wrold<br/>");
+		$this->_layout->meta_title = 'A Blog';
+		$this->_layout->body = 'Hello Wrold';
+	}
+	
+	public function testeAction()
+	{
+		$mysqli = new mysqli("localhost", "root", "", "yafcms");
+		$mysqli->set_charset("utf8");
+		$result = $mysqli->query("SELECT * FROM usuarios LIMIT 10000");
+		$this->_view->entries = $result;		
+	}
+	
+	public function listaAction()
+	{
+		$usuarios = new UsuariosModel();
+		$this->_view->entries = $usuarios->fetchAll();
 	}
 }

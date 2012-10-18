@@ -1,0 +1,36 @@
+        <div class="grid_10">
+            <div class="box round first grid">
+                <h2>Tables & Grids</h2>
+                <div class="block">
+                    <table class="data display datatable" id="example">
+						<thead>
+							<tr>
+								<th>Rendering engine</th>
+								<th>Browser</th>
+								<th>Platform(s)</th>
+								<th>Engine version</th>
+								<th>CSS grade</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($this->entries as $entry): ?>
+							<tr class="odd gradeX">
+								<td><?= $entry->nome ?></td>
+								<td><?= $entry->email ?></td>
+								<td><?= $entry->tipo ?></td>
+								<td class="center"><?= $entry->dataCadastro ?></td>
+								<td class="center"><?= $entry->tipoPagamento ?></td>
+							</tr>
+							<?php endforeach; ?>
+							<tr class="even gradeC">
+								<td>Trident</td>
+								<td>Internet
+									 Explorer 5.0</td>
+								<td>Win 95+</td>
+								<td class="center">5</td>
+								<td class="center">C</td>
+							</tr>
+						</tbody>
+					</table>
+                </div>
+            </div>
