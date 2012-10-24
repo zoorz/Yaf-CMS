@@ -4,8 +4,7 @@
                 <div class="block">
                 	Número de registros: <strong><?= $this->entries->num_rows ?></strong><br/>--<br/>
                 	<?php while( $line = $this->entries->fetch_object() ): ?>
-                		Data de cadastro: <strong><?= $line->dataCadastro ?></strong> | Tipo de Pagamento: <strong><?= $line->tipoPagamento ?></strong>
-                		<br/>
+                		.
                 	<?php endwhile; ?>
                 </div>
             </div>

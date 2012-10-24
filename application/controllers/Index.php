@@ -22,9 +22,9 @@ class IndexController extends AppController
 	
 	public function testeAction()
 	{
-		$mysqli = new mysqli("localhost", "root", "", "yafcms");
+		$mysqli = new mysqli("localhost", "root", "yO3aS%*Z", "yafcms");
 		$mysqli->set_charset("utf8");
-		$result = $mysqli->query("SELECT * FROM usuarios LIMIT 10000");
+		$result = $mysqli->query("SELECT * FROM usuarios");
 		$this->_view->entries = $result;		
 	}
 	

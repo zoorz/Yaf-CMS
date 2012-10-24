@@ -56,12 +56,12 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
 		echo 'raa!';
 		exit;*/
 	}
-	/*
+	
 	public function _initDefaultDbAdapter()
 	{
 		$dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(
 			$this->_config->database->params->toArray()
 		);
 		Zend_Db_Table::setDefaultAdapter( $dbAdapter );
-	}*/
+	}
 }
