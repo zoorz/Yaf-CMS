@@ -1,0 +1,125 @@
+<?php use Helper\Html; ?>
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+	<meta charset="utf-8">
+	<title>Bootstrap, from Twitter</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="<?=$this->base_url?>/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<style type="text/css">
+	body {
+		padding-top: 60px;
+		padding-bottom: 40px;
+	}
+	.sidebar-nav {
+		padding: 9px 0;
+	}
+	</style>
+	<link href="<?=$this->base_url?>/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	</head>
+
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="#">YafCMS</a>
+				<div class="nav-collapse collapse">
+					<!-- <p class="navbar-text pull-right">Logged in as <a href="#" class="navbar-link">Username</a></p> -->
+					<div class="btn-group pull-right">
+						<a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> Usuário</a>
+						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#"><i class="icon-pencil"></i> Editar</a></li>
+							<li><a href="#"><i class="icon-trash"></i> Apagar</a></li>
+							<li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+							<li class="divider"></li>
+							<li><a href="#"><i class="i"></i> Tornar Administrador</a></li>
+						</ul>
+					</div>
+					<div class="divider-vertical pull-right"></div>
+					<form class="navbar-search pull-right typeahead" onsubmit="return false;">
+						<input type="text" class="search-query input-xlarge" data-provide="typeahead" placeholder="Busca" />
+					</form>
+					
+					<ul class="nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span2">
+				<div class="well sidebar-nav">
+					<ul class="nav nav-list">
+						<li class="nav-header">CMS</li>
+						<li <?php echo strcmp($this->controller,'Index')==0?'class="active"':null ?>><?php echo Html::linkTo(_('Home'), array('module'=>'admin', 'controller'=>'index', 'action'=>'index')) ?></li>
+						<li <?php echo strcmp($this->controller,'PagesManager')==0?'class="active"':null ?>><?php echo Html::linkTo(_('Pages manager'), array('module'=>'admin', 'controller'=>'pagesManager', 'action'=>'index')) ?></li>
+						<li <?php echo strcmp($this->controller,'Products')==0?'class="active"':null ?>><?php echo Html::linkTo(_('Products'), array('module'=>'admin', 'controller'=>'products', 'action'=>'index')) ?></li>
+						<li <?php echo strcmp($this->controller,'PhotoGalleries')==0?'class="active"':null ?>><?php echo Html::linkTo(_('Photo galleries'), array('module'=>'admin', 'controller'=>'photoGalleries', 'action'=>'index')) ?></li>
+						<li <?php echo strcmp($this->controller,'VideoGalleries')==0?'class="active"':null ?>><?php echo Html::linkTo(_('Video galleries'), array('module'=>'admin', 'controller'=>'videoGalleries', 'action'=>'index')) ?></li>
+						<li <?php echo strcmp($this->controller,'News')==0?'class="active"':null ?>><?php echo Html::linkTo(_('News'), array('module'=>'admin', 'controller'=>'news', 'action'=>'index')) ?></li>
+						<li <?php echo strcmp($this->controller,'CommentsManager')==0?'class="active"':null ?>><?php echo Html::linkTo(_('Comments manager'), array('module'=>'admin', 'controller'=>'commentsManager', 'action'=>'index')) ?></li>
+						<li class="nav-header"><?php echo _('Pages manager')?></li>
+						<li><?php echo Html::linkTo(_('List pages'), array('module'=>'admin', 'controller'=>'pagesManager', 'action'=>'index')) ?></li>
+						<li><?php echo Html::linkTo(_('Add page'), array('module'=>'admin', 'controller'=>'pagesManager', 'action'=>'add')) ?></li>
+						<li class="nav-header"><?php echo _('Products')?></li>
+						<li><?php echo Html::linkTo(_('List products'), array('module'=>'admin', 'controller'=>'products', 'action'=>'index')) ?></li>
+						<li><?php echo Html::linkTo(_('Add product'), array('module'=>'admin', 'controller'=>'products', 'action'=>'add')) ?></li>
+						<li><?php echo Html::linkTo(_('List categories'), array('module'=>'admin', 'controller'=>'productCategories', 'action'=>'index')) ?></li>
+						<li><?php echo Html::linkTo(_('Add category'), array('module'=>'admin', 'controller'=>'productCategories', 'action'=>'add')) ?></li>
+						<li class="nav-header"><?php echo _('Photo galleries')?></li>
+						<li><?php echo Html::linkTo(_('List galleries'), array('module'=>'admin', 'controller'=>'photoGalleries', 'action'=>'index')) ?></li>
+						<li><?php echo Html::linkTo(_('Add gallery'), array('module'=>'admin', 'controller'=>'photoGalleries', 'action'=>'add')) ?></li>
+						<li><?php echo Html::linkTo(_('Add photo'), array('module'=>'admin', 'controller'=>'photos', 'action'=>'add')) ?></li>
+						<li class="nav-header"><?php echo _('Video galleries')?></li>
+						<li><?php echo Html::linkTo(_('List galleries'), array('module'=>'admin', 'controller'=>'videoGalleries', 'action'=>'index')) ?></li>
+						<li><?php echo Html::linkTo(_('Add gallery'), array('module'=>'admin', 'controller'=>'videoGalleries', 'action'=>'add')) ?></li>
+						<li><?php echo Html::linkTo(_('Add video'), array('module'=>'admin', 'controller'=>'videos', 'action'=>'add')) ?></li>
+						<li class="nav-header"><?php echo _('News')?></li>
+						<li><?php echo Html::linkTo(_('List posts'), array('module'=>'admin', 'controller'=>'news', 'action'=>'index')) ?></li>
+						<li><?php echo Html::linkTo(_('Add post'), array('module'=>'admin', 'controller'=>'news', 'action'=>'add')) ?></li>
+						<li><?php echo Html::linkTo(_('List categories'), array('module'=>'admin', 'controller'=>'newsCategories', 'action'=>'index')) ?></li>
+						<li><?php echo Html::linkTo(_('Add category'), array('module'=>'admin', 'controller'=>'newsCategories', 'action'=>'add')) ?></li>
+						<li class="nav-header"><?php echo _('Comments manager')?></li>
+						<li><?php echo Html::linkTo(_('List comments'), array('module'=>'admin', 'controller'=>'commentsManager', 'action'=>'index')) ?></li>
+					</ul>
+				</div>
+			</div>
+			<div class="span10">
+				<?php if( $this->breadcrumb ): $totalBreadcrumb = count( $this->breadcrumb ); $iBreadcrumb = 0; $lastBreadcrumb = false; ?>
+				<ul class="breadcrumb">
+					<?php foreach( $this->breadcrumb as $item ): $lastBreadcrumb = ++$iBreadcrumb == $totalBreadcrumb; ?>
+					<?php if( !$lastBreadcrumb ): ?>
+					<li><?php echo Html::linkTo(_($item[0]), $item[1]); ?> <span class="divider">/</span></li>
+					<?php else: ?>
+					<li class="active"><?php echo _( $item[0] )?></li>
+					<?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
+				<?php endif; ?>
+				<?php echo $content ?>
+			</div>
+		</div>
+		<hr/>
+		<footer>
+			<p>&copy; Company 2012</p>
+		</footer>
+	</div>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="<?=$this->base_url?>/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>
