@@ -2,16 +2,16 @@
 /**
  * @name Bootstrap
  * @author root
- * @desc æ‰€æœ‰åœ¨Bootstrapç±»ä¸­, ä»¥_initå¼€å¤´çš„æ–¹æ³•, éƒ½ä¼šè¢«Yafè°ƒç”¨,
+ * @desc ËùÓÐÔÚBootstrapÀàÖÐ, ÒÔ_init¿ªÍ·µÄ·½·¨, ¶¼»á±»Yafµ÷ÓÃ,
  * @see http://www.php.net/manual/en/class.yaf-bootstrap-abstract.php
- * è¿™äº›æ–¹æ³•, éƒ½æŽ¥å—ä¸€ä¸ªå‚æ•°:Yaf_Dispatcher $dispatcher
- * è°ƒç”¨çš„æ¬¡åº, å’Œç”³æ˜Žçš„æ¬¡åºç›¸åŒ
+ * ÕâÐ©·½·¨, ¶¼½ÓÊÜÒ»¸ö²ÎÊý:Yaf_Dispatcher $dispatcher
+ * µ÷ÓÃµÄ´ÎÐò, ºÍÉêÃ÷µÄ´ÎÐòÏàÍ¬
  */
 class Bootstrap extends Yaf_Bootstrap_Abstract {
 
     private $_config;
 
-    //å®žçŽ°ç±»çš„è‡ªåŠ¨åŠ è½½æœºåˆ¶ï¼Œå¤šæ¨¡å—é…ç½®æ—¶ï¼Œéžindexæ¨¡å—ä¸‹çš„controllerå¯ä»¥ç›´æŽ¥ç»§æ‰¿indexæ¨¡å—ä¸‹çš„controllerï¼Œä¸»è¦å®žçŽ°è¯¸å¦‚ç™»é™†éªŒè¯ï¼Œæƒé™æŽ§åˆ¶ç­‰
+    //ÊµÏÖÀàµÄ×Ô¶¯¼ÓÔØ»úÖÆ£¬¶àÄ£¿éÅäÖÃÊ±£¬·ÇindexÄ£¿éÏÂµÄcontroller¿ÉÒÔÖ±½Ó¼Ì³ÐindexÄ£¿éÏÂµÄcontroller£¬Ö÷ÒªÊµÏÖÖîÈçµÇÂ½ÑéÖ¤£¬È¨ÏÞ¿ØÖÆµÈ
     public function _initLoader(Yaf_Dispatcher $dispatcher)
     {
         $loader = Tectrend\Autoloader::getInstance( $dispatcher->getApplication()->getModules() );
@@ -32,7 +32,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         set_include_path(get_include_path() . PATH_SEPARATOR . $this->_config->application->library->directory);
     }
 
-    //é’ˆå¯¹å¼€å‘çŽ¯å¢ƒ/ç”Ÿäº§çŽ¯å¢ƒè¿›è¡Œé”™è¯¯è¾“å‡ºæŽ§åˆ¶
+    //Õë¶Ô¿ª·¢»·¾³/Éú²ú»·¾³½øÐÐ´íÎóÊä³ö¿ØÖÆ
     public function _initErrors(){
         if($this->_config->application->showErrors){
             error_reporting (-1);
@@ -40,12 +40,12 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         }
     }
 
-    //Library å¯¼å…¥
+    //Library µ¼Èë
     public function _initNamespaces(){
         Yaf_Loader::getInstance()->registerLocalNameSpace(array("Zend"));
     }
 
-    //è·¯ç”±é…ç½®
+    //Â·ÓÉÅäÖÃ
     public function _initRoutes(){
         /*
         $config = new Yaf_Config_Ini(APP_PATH.'conf/routes.ini');
@@ -57,7 +57,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
     }
 
     /*
-    //å¤šæ¨¡å—è‡ªå®šä¹‰è·¯ç”±å®žçŽ°,å­˜åœ¨é—®é¢˜,æç½®
+    //¶àÄ£¿é×Ô¶¨ÒåÂ·ÓÉÊµÏÖ,´æÔÚÎÊÌâ,¸éÖÃ
     public function _initModules(Yaf_Dispatcher $dispatcher)
     {
         $app = $dispatcher->getApplication();
@@ -71,17 +71,17 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
     }
     */
 
-    //requestå¤„ç†ï¼Œé’ˆå¯¹getParamï¼ŒgetParamsé‡å†™ï¼Œé€‚åº”zendé£Žæ ¼èŽ·å–å‚æ•°
+    //request´¦Àí£¬Õë¶ÔgetParam£¬getParamsÖØÐ´£¬ÊÊÓ¦zend·ç¸ñ»ñÈ¡²ÎÊý
     public function _initRequest(Yaf_Dispatcher $dispatcher)
     {
         $dispatcher->setRequest(new Request());
     }
 
-    //æ¨¡æ¿æ”¯æŒé…ç½®
+    //Ä£°åÖ§³ÖÅäÖÃ
     public function _initLayout(Yaf_Dispatcher $dispatcher){
         /*layout allows boilerplate HTML to live in /views/layout rather than every script*/
         $layout = new Layout($this->_config->layout->dir);
-        //ajax è¯·æ±‚ï¼Œå…³é—­layout
+        //ajax ÇëÇó£¬¹Ø±Õlayout
         if($dispatcher->getRequest()->isXmlHttpRequest() )
         {
             $layout->disableLayout();
@@ -89,7 +89,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         $dispatcher->setView($layout);
     }
 
-    //æœ¬åœ°åŒ–æ”¯æŒ
+    //±¾µØ»¯Ö§³Ö
     public function _initLocales(Yaf_Dispatcher $dispatcher)
     {
         $lang = $this->_config->language;
