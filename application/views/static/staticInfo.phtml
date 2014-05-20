@@ -1,0 +1,81 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->static_resource_domain;?>/assets/plugins/select2/select2_metro.css" />
+<link rel="stylesheet" href="<?php echo $this->static_resource_domain;?>/assets/plugins/data-tables/DT_bootstrap.css" />
+<div class="row">
+	<select id="game_id" name="game_id" class="form-control input-medium select2me" data-placeholder="Select...">
+	<option value="5">街机武侠<option>
+	<option value="4">激战海贼王<option>
+	<option value="">复用<option>
+</select>
+<input type="button" class="btn default" value="确定" onclick="getStatic();"></input>
+
+</div>
+<div class="row">
+<div class="col-md-6">
+	<!-- BEGIN SAMPLE TABLE PORTLET-->
+	<div class="portlet box red">
+		<div class="portlet-title">
+			<div class="caption"><i class="fa fa-cogs"></i>Simple Table</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+				<a href="#portlet-config" data-toggle="modal" class="config"></a>
+				<a href="javascript:;" class="reload"></a>
+				<a href="javascript:;" class="remove"></a>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>内网IP</th>
+							<th>外网IP</th>
+						</tr>
+					</thead>
+					<tbody id="show_static">
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- END SAMPLE TABLE PORTLET-->
+</div>
+	
+</div>
+
+<script type="text/javascript" src="<?php echo $this->static_resource_domain;?>/assets/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->static_resource_domain;?>/assets/plugins/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<?php echo $this->static_resource_domain;?>/assets/plugins/data-tables/DT_bootstrap.js"></script>
+<script src="<?php echo $this->static_resource_domain;?>/assets/scripts/table-managed.js"></script>     
+	<script>
+		jQuery(document).ready(function() {  
+		  // App.init();     
+		   TableManaged.init();
+		});
+		function getStatic(){
+			var game_id = $("#game_id").val();
+			var url = '/Static/getStatic';
+			$.ajax({
+				type:"post",
+				url:url,
+				data:{
+					game_id:game_id
+				},
+				dataType: 'json',
+				success: function(data) { 
+					str = '';
+					for(i in data){
+						str += '<tr>';
+						str += '<td>'+data[i]['inner_ip']+'</td>';
+						str += '<td>'+data[i]['out_ip']+'</td>';
+						str += '</tr>';
+					}
+					$("#show_static").html(str);
+			},
+			error:function() {
+				alert("error");
+			}
+			});
+		}
+	</script>
+

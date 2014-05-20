@@ -1,0 +1,136 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: oms_v1.0\n"
+"POT-Creation-Date: 2014-05-19 15:58+0800\n"
+"PO-Revision-Date: 2014-05-19 18:47+0800\n"
+"Last-Translator: zoe <zoechow8@gmail.com>\n"
+"Language-Team: 51webgame1 <51webgame1@mail.51.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: D:\\my_gitpages\\oms.wuming.com\\application\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-KeywordsList: _()\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: controllers\n"
+"X-Poedit-SearchPath-1: modules\n"
+"X-Poedit-SearchPath-2: models\n"
+"X-Poedit-SearchPath-3: views\n"
+"X-Poedit-SearchPath-4: layouts\n"
+
+#: controllers/Index.php:8 controllers/Index.php:18 models/SystemConfig.php:45
+#: models/SystemConfig.php:93
+msgid "首页"
+msgstr "Home"
+
+#: controllers/Index.php:19 controllers/Index.php:21
+msgid "硬件概览"
+msgstr "Hardware overview"
+
+#: controllers/Index.php:22 modules/Serverstat/controllers/Index.php:20
+msgid "服务器,成本,硬件概览信息"
+msgstr "Server,Fee,Hardware information overview"
+
+#: models/ServerStat.php:26 models/ServerStat.php:85
+msgid "未分配"
+msgstr "Not use"
+
+#: models/SystemConfig.php:40
+msgid "更多"
+msgstr "More"
+
+#: models/SystemConfig.php:97
+msgid "硬件管理"
+msgstr "Server manage"
+
+#: models/SystemConfig.php:101
+msgid "服务器成本"
+msgstr "Fee"
+
+#: models/SystemConfig.php:105 models/SystemConfig.php:122
+msgid "服务器参数详情"
+msgstr "Detail information of server"
+
+#: models/SystemConfig.php:109 models/SystemConfig.php:126
+msgid "区服状态"
+msgstr "Server status"
+
+#: models/SystemConfig.php:114
+msgid "DB管理"
+msgstr "Db manage"
+
+#: models/SystemConfig.php:118
+msgid "DB备份"
+msgstr "DB backup"
+
+#: models/SystemConfig.php:137
+msgid "街机武侠_new"
+msgstr "THE ONE WORLD_III"
+
+#: models/SystemConfig.php:138
+msgid "决战海贼王"
+msgstr "ONE PIECE_II"
+
+#: models/SystemConfig.php:139
+#: modules/Serverstat/controllers/ServerStat.php:16
+msgid "街机武侠"
+msgstr "THE ONE WORLD_II"
+
+#: models/SystemConfig.php:140
+msgid "天下第一"
+msgstr "THE ONE WORLD_I"
+
+#: models/SystemConfig.php:141
+msgid "海贼无双"
+msgstr "ONE PIECE"
+
+#: modules/Serverstat/controllers/Index.php:17
+#: modules/Serverstat/controllers/Index.php:19
+msgid "服务器概览"
+msgstr "Overview information of the server"
+
+#: modules/Serverstat/views/index/overview.phtml:27 views/index/index.phtml:23
+msgid "服务器信息汇总"
+msgstr "Overview information of the server"
+
+#: modules/Serverstat/views/index/overview.phtml:33 views/index/index.phtml:29
+msgid "内网IP"
+msgstr "Inner ip"
+
+#: modules/Serverstat/views/index/overview.phtml:34 views/index/index.phtml:30
+msgid "外网IP"
+msgstr "Outer ip"
+
+#: modules/Serverstat/views/index/overview.phtml:35 views/index/index.phtml:31
+msgid "用途"
+msgstr "Usage"
+
+#: modules/Serverstat/views/index/overview.phtml:36 views/index/index.phtml:32
+msgid "属主"
+msgstr "Belong to"
+
+#: modules/Serverstat/views/index/overview.phtml:37 views/index/index.phtml:33
+msgid "当前状态"
+msgstr "Current status"
+
+#: modules/Serverstat/views/index/overview.phtml:77 views/index/index.phtml:74
+msgid "磁盘"
+msgstr "Disk"
+
+#: modules/Serverstat/views/index/overview.phtml:78 views/index/index.phtml:75
+msgid "内存"
+msgstr "Memory"
+
+#: modules/Serverstat/views/index/overview.phtml:79 views/index/index.phtml:76
+msgid "CPU"
+msgstr "CPU"
+
+#: modules/Serverstat/views/index/overview.phtml:80 views/index/index.phtml:77
+msgid "IDC"
+msgstr "IDC"
+
+#: modules/Serverstat/views/index/overview.phtml:81 views/index/index.phtml:78
+msgid "其他详情"
+msgstr "Others"

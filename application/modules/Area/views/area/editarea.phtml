@@ -1,0 +1,169 @@
+<?php 
+use Helper\Html;
+use Helper\LayoutPart;
+?>
+<?php
+Html::placeHolder()->headLink()->appendStylesheet('/assets/plugins/data-tables/DT_bootstrap.css');
+Html::placeHolder()->headLink()->appendStylesheet('/assets/plugins/platAreaSelector/platAreaSelector.css');
+echo Html::placeHolder()->appendLink();
+?>
+<!-- BEGIN PAGE HEADER-->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			<?=$this->title?> <small><?=$this->brief_desc?></small>
+		</h3>
+		<?php 
+		echo LayoutPart::drawBreadcrumb($this->h_breadcrumb);?>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="fa fa-globe"></i><?=_('区服列表')?></div>
+				<li class="pull-right">
+					<div id="plat_area_select" class="plat-area-selector tooltips" data-placement="top" data-original-title="平台信息">
+		                <i class="fa fa-gamepad"></i>
+		                <span></span>
+		                <i class="fa fa-angle-down"></i>
+		            </div>
+				</li>
+			</div>
+			<div class="portlet-body">
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th><?=_('内网IP')?></th>
+							<th><?=_('外网IP')?></th>
+							<th><?=_('用途')?></th>
+							<th><?=_('属主')?></th>
+							<th><?=_('当前状态')?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							foreach($this->statData as $k=>$row):
+						?>
+						<tr data-index="<?=$k?>">
+							<td><?=$row['inner_ip']?></td>
+							<td><?=$row['out_ip']?></td>
+							<td><?=$row['category']?></td>
+							<td><?=$row['belong_to']?></td>
+							<td><?=$row['status']?></td>
+						</tr>
+						<?php
+							endforeach;
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+Html::placeHolder()->headScript()->appendFile('/assets/plugins/data-tables/jquery.dataTables.min.js');
+Html::placeHolder()->headScript()->appendFile('/assets/plugins/data-tables/DT_bootstrap.js');
+Html::placeHolder()->headScript()->appendFile('/assets/plugins/platAreaSelector/platAreaSelector.js');
+?>
+<?php 
+Html::placeHolder()->headScript()->captureStart();
+?>
+</script>
+<script>
+	var ServerStat = function()
+	{
+		var initTable1 = function() 
+		{
+
+	        /* Formatting function for row details */
+	        function fnFormatDetails ( oTable, nTr )
+	        {
+	            var aData = nTr;
+	            var sOut = '<table>';
+	            sOut += '<tr><td>'+'<?=_("磁盘")?>'+':</td><td>'+aData['disk']+'</td></tr>';
+	            sOut += '<tr><td>'+'<?=_("内存")?>'+':</td><td>'+aData['mem']+'</td></tr>';
+	            sOut += '<tr><td>'+'<?=_("CPU")?>'+':</td><td>'+aData['cpu']+'</td></tr>';
+	            sOut += '<tr><td>'+'<?=_("IDC")?>'+':</td><td>'+aData['idc']+'</td></tr>';
+	            sOut += '<tr><td>'+'<?=_("其他详情")?>'+':</td><td><a href="#">'+aData['inner_ip']+'</a></td></tr>';
+	            sOut += '</table>';
+	             
+	            return sOut;
+	        }
+
+	        /*
+	         * Insert a 'details' column to the table
+	         */
+	        var nCloneTh = document.createElement( 'th' );
+	        var nCloneTd = document.createElement( 'td' );
+	        nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
+	         
+	        $('#sample_1 thead tr').each( function () {
+	            this.insertBefore( nCloneTh, this.childNodes[0] );
+	        } );
+	         
+	        $('#sample_1 tbody tr').each( function () {
+	            this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+	        } );
+	         
+	        /*
+	         * Initialize DataTables, with no sorting on the 'details' column
+	         */
+	        var oTable = $('#sample_1').dataTable( {
+	            "aoColumnDefs": [
+	                {"bSortable": false, "aTargets": [ 0 ] }
+	            ],
+	            "aaSorting": [[1, 'asc']],
+	             "aLengthMenu": [
+	                [5, 15, 20, -1],
+	                [5, 15, 20, "All"] // change per page values here
+	            ],
+	            // set the initial value
+	            "iDisplayLength": 10,
+	        });
+
+	        jQuery('#sample_1_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+	        jQuery('#sample_1_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+	        jQuery('#sample_1_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+	         
+	        /* Add event listener for opening and closing details
+	         * Note that the indicator for showing which row is open is not controlled by DataTables,
+	         * rather it is done here
+	         */
+	        $('#sample_1').on('click', ' tbody td .row-details', function () {
+	        	var statData = <?=json_encode($this->statData)?>;
+	            var nTr = $(this).parents('tr')[0];
+	            var index = $(nTr).attr('data-index');
+	            var rowData = statData[index];
+	            if ( oTable.fnIsOpen(nTr) )
+	            {
+	                /* This row is already open - close it */
+	                $(this).addClass("row-details-close").removeClass("row-details-open");
+	                oTable.fnClose( nTr );
+	            }
+	            else
+	            {
+	                /* Open this row */                
+	                $(this).addClass("row-details-open").removeClass("row-details-close");
+	                oTable.fnOpen( nTr, fnFormatDetails(oTable, rowData), 'details' );
+	            }
+	        });
+    	};
+		return{
+			init:function()
+			{
+				initTable1();
+			}
+		};
+	}();
+    jQuery(document).ready(function() {
+       ServerStat.init();
+    });	 
+<?php 
+Html::placeHolder()->headScript()->captureEnd();
+echo Html::placeHolder()->appendScript();
+?>

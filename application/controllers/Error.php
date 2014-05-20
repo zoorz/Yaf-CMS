@@ -9,7 +9,6 @@ class ErrorController extends Yaf_Controller_Abstract {
 
     public function errorAction() {
         $exception = $this->getRequest()->getParam('exception');
-
         /*if errors are enabled show the full trace*/
         $showErrors = $this->_config->application->showErrors;
         $this->_view->trace = ($showErrors) ? $exception->getTraceAsString() : '';

@@ -1,24 +1,30 @@
 <?php
-class IndexController extends Yaf_Controller_Abstract {
+class IndexController extends ApplicationController {
 
-    private $_layout;
-
-    public function init(){
-        $this->_layout = Yaf_Registry::get('layout');
+	public function init()
+	{
+		parent::init();
+		$this->getView()->h_breadcrumb = array(
+			array(_('首页'),'/index/index')
+		);
+		// Set the layout.
+        $this->getView()->setLayout($this->layout);
+	}
+    public function indexAction() {
+        $model = new ServerStatModel();
+        $this->getView()->statData = $model->overviewStat();
+        $this->getView()->h_breadcrumb = array(
+        	
+        	array(_('首页'),'/index/index'),
+        	array(_("硬件概览"),'#')
+        );
+        $this->getView()->title = _('硬件概览');
+        $this->getView()->brief_desc = _('服务器,成本,硬件概览信息');
     }
 
-    public function indexAction() {
-        
-        $page = ($this->getRequest()->getParam('page')) ?: 0; //unused - see Bootstrap::_initRoutes
-
-        $blog = new BlogModel();
-
-        /*view*/
-        $this->_view->entries = $blog->fetchAll();
-        $this->_view->page = $page;
-
-        /*layout*/
-        $this->_layout->meta_title = 'A Blog';
+    public function demoAction(){
+        $this->getView()->disableLayout();
+        $this->getView()->test = 'aaaa';
     }
     
 }
